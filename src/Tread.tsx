@@ -1,13 +1,14 @@
 import { FC, useState } from "react";
 import { ArrowUpIcon, ArrowDownIcon } from "@heroicons/react/24/solid";
 
-import { upvoteAnswer, downvoteAnswer } from "./Apis";
+import { upvoteAnswer, downvoteAnswer } from "./APIs";
 import { Answer } from "./type";
 
 interface TreadProps {
   title: string;
   content: string;
   answers: Answer[];
+  sort: number;
   refreshFn: (sort: number) => void;
 }
 
@@ -23,7 +24,7 @@ const Tread: FC<TreadProps> = (prop) => {
   const [answerVotes, setAnswerVotes] = useState<Map<number, number>>(
     answerToVoteMap(prop.answers)
   );
-  const [sortOption, setSortOption] = useState<string>("default");
+  const [sortOption, setSortOption] = useState<string>(String(prop.sort));
 
   const handleUpvote = async (id: number) => {
     const answer = prop.answers.find((it) => it.id == id);
