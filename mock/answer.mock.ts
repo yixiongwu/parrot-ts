@@ -12,13 +12,13 @@ export default defineMock([
       const sort = req.query.sort;
       const list = data.filter(it => it.questionId == questionId) ?? null
       if (sort == 1) {
-        list.sort((a, b) => a.createDate - b.createDate);
+        list.sort((a, b) => a.createDate.getTime() - b.createDate.getTime());
       } else if (sort == 2) {
-        list.sort((a, b) => a.updateDate - b.updateDate);
+        list.sort((a, b) => a.updateDate.getTime() - b.updateDate.getTime());
       } else if (sort == 3) {
         list.sort((a, b) => (b.upvote - b.downvote) - (a.upvote - a.downvote));
       }
-      res.end(JSON.stringify(list));
+      res.end(JSON.stringify(CreateResult(list)));
     }
   },
   {

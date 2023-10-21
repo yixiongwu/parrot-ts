@@ -9,7 +9,7 @@ export const questions = defineMockData('questions', [
 ])
 
 export const answers = defineMockData('answers', [
-    { id: 1, content: 'content1', questionId: question_1_id, createDate: Date.parse("Aug 9, 2023"), updateDate: Date.parse("Aug 13, 2023"), upvote: 3, downvote: 0 },
-    { id: 2, content: 'content2', questionId: question_1_id, createDate: Date.parse("Aug 10, 2023"), updateDate: Date.parse("Aug 11, 2023"), upvote: 5, downvote: 0 },
-    { id: 3, content: 'content3', questionId: question_2_id, createDate: Date.parse("Aug 11, 2023"), updateDate: Date.parse("Aug 12, 2023"), upvote: 0, downvote: 0 },
+    { id: 1, content: 'content1', questionId: question_1_id, createDate: new Date("2023/10/1"), updateDate: new Date("2023/10/23"), upvote: 3, downvote: 0 },
+    { id: 2, content: 'content2', questionId: question_1_id, createDate: new Date("2023/10/3"), updateDate: new Date("2023/10/12"), upvote: 5, downvote: 0 },
+    { id: 3, content: 'content3', questionId: question_2_id, createDate: new Date("2023/10/4"), updateDate: new Date("2023/10/13"), upvote: 0, downvote: 0 },
 ])
