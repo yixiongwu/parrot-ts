@@ -13,7 +13,7 @@ parrot-ts is a q&amp;a website power by TypeScript, React, Tailwind CSS
 - [ ] Error handling
 
 # Guidelines
-- Clone
+- Clone the repository
 - Run `npm i` to install dependent
 - Run `npm run dev` to start the server
 - Press `o` to open the browser
