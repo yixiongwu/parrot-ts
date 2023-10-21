@@ -1,38 +1,34 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 
-import Tread from './Tread';
-import { Result, Question, Answer } from "./type";
+import Tread from "./Tread";
+import { getQuestion } from "./Apis";
+import { Question } from "./type";
 
 const searchParams = new URLSearchParams(window.location.search);
-const id = searchParams.get("id");
-const getQuestionURL = `/api/question/get?id=${id}`;
-
-
-const listAnswerURL = `/api/answer/list?questionId=${id}`;
-
+const id = Number(searchParams.get("id"));
 
 const App = () => {
-
   const [question, setQuestion] = useState<Question>();
 
+  const refreshQuestion = async (id: number, sort: number) => {
+    const question = await getQuestion(id, sort);
+    setQuestion(question);
+  };
+
   useEffect(() => {
-    const fetch = async () => {
-      const questionRet = await axios.get<Result<Question>>(getQuestionURL);
-      const questionResult = questionRet.data;
-      const answerRet = await axios.get<Result<Answer[]>>(listAnswerURL);
-      const answerResult = answerRet.data;
-      const question = questionResult.data;
-      question.answers = answerResult.data;
-      // console.log(questionResult)
-      setQuestion(question);
-    };
-    fetch();
+    refreshQuestion(id, 0);
   }, []);
 
   return (
     <div className="App">
-      {question && <Tread title={question.title} content={question.content} answers={question.answers} />}
+      {question && (
+        <Tread
+          title={question.title}
+          content={question.content}
+          answers={question.answers}
+          refreshFn={(sort: number) => refreshQuestion(id, sort)}
+        />
+      )}
     </div>
   );
 };

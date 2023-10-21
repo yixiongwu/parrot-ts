@@ -1,12 +1,14 @@
 import { FC, useState } from "react";
-import axios from "axios";
-import { ArrowUpIcon, ArrowDownIcon } from "@heroicons/react/24/solid"; // Import the icons
+import { ArrowUpIcon, ArrowDownIcon } from "@heroicons/react/24/solid";
+
+import { upvoteAnswer, downvoteAnswer } from "./Apis";
 import { Answer } from "./type";
 
 interface TreadProps {
   title: string;
   content: string;
   answers: Answer[];
+  refreshFn: (sort: number) => void;
 }
 
 const answerToVoteMap = (answers: Answer[]) =>
@@ -17,42 +19,49 @@ const answerToVoteMap = (answers: Answer[]) =>
     ])
   );
 
-const upvoteAnswerURL = (id: number) => `/api/answer/upvote?id=${id}`;
-const downvoteAnswerURL = (id: number) => `/api/answer/downvote?id=${id}`;
-
-const Tread: FC<TreadProps> = (question) => {
+const Tread: FC<TreadProps> = (prop) => {
   const [answerVotes, setAnswerVotes] = useState<Map<number, number>>(
-    answerToVoteMap(question.answers)
+    answerToVoteMap(prop.answers)
   );
+  const [sortOption, setSortOption] = useState<string>("default");
 
   const handleUpvote = async (id: number) => {
-    const answer = question.answers.find((it) => it.id == id);
+    const answer = prop.answers.find((it) => it.id == id);
     if (answer) {
       answer.upvote++;
     }
-    setAnswerVotes(answerToVoteMap(question.answers));
-    await axios.post(upvoteAnswerURL(id));
+    setAnswerVotes(answerToVoteMap(prop.answers));
+    await upvoteAnswer(id);
     console.log(`Upvoted answer with id: ${id}`);
   };
 
   const handleDownvote = async (id: number) => {
-    const answer = question.answers.find((it) => it.id == id);
+    const answer = prop.answers.find((it) => it.id == id);
     if (answer) {
       answer.downvote++;
     }
-    setAnswerVotes(answerToVoteMap(question.answers));
-    await axios.post(downvoteAnswerURL(id));
+    setAnswerVotes(answerToVoteMap(prop.answers));
+    await downvoteAnswer(id);
     console.log(`Downvoted answer with id: ${id}`);
+  };
+
+  const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    prop.refreshFn(Number(event.target.value));
+    setSortOption(event.target.value);
   };
 
   return (
     <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4">{question.title}</h1>
-      <p className="mb-8">{question.content}</p>
-      <h2 className="text-xl font-bold mb-4">
-        {question.answers.length} Answers
-      </h2>
-      {question.answers.map((answer) => (
+      <h1 className="text-2xl font-bold mb-4">{prop.title}</h1>
+      <p className="mb-8">{prop.content}</p>
+      <h2 className="text-xl font-bold mb-4">{prop.answers.length} Answers</h2>
+      <select value={sortOption} onChange={handleSortChange}>
+        <option value="0">Default</option>
+        <option value="1">Vote</option>
+        <option value="2">Created Date</option>
+        <option value="3">Update Date</option>
+      </select>
+      {prop.answers.map((answer) => (
         <div key={answer.id} className="mb-4 p-4 border rounded flex">
           <div className="ml-4 flex flex-col items-center">
             <ArrowUpIcon

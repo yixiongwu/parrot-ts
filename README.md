@@ -7,5 +7,6 @@ parrot-ts is a q&amp;a website power by TypeScript, React, Tailwind CSS
 - [x] Install axios, call mock service and display the data
 - [x] Single page display, layout, binding
 - [x] Implement upvote and downvote
+- [x] Implement sort
 - [] Beautify UI
 - [] Error handling
