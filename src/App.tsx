@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import Tread from "./Tread";
 import { getAnswers, getQuestion } from "./APIs";
@@ -32,7 +32,12 @@ const App = () => {
     sessionStorage.setItem(AnswerSortSessionKey, String(sort));
   };
 
+  const isFirstRender = useRef(true);
   useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }    
     console.log(`useEffect ${sort}`)
     refreshQuestion(id, sort);
   }, [sort]);
