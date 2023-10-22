@@ -10,7 +10,6 @@ export type Question = {
     content: string;
     upvote: number;
     downvote: number;
-    answers: Answer[];
 }
 
 export type Answer = {
