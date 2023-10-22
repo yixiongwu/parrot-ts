@@ -46,7 +46,7 @@ const Tread: FC<TreadProps> = (prop) => {
     console.log(`Downvoted answer with id: ${id}`);
   };
 
-  const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleSortChanged = (event: React.ChangeEvent<HTMLSelectElement>) => {
     prop.refreshFn(Number(event.target.value));
     setSortOption(event.target.value);
   };
@@ -56,7 +56,7 @@ const Tread: FC<TreadProps> = (prop) => {
       <h1 className="text-2xl font-bold mb-4">{prop.title}</h1>
       <p className="mb-8">{prop.content}</p>
       <h2 className="text-xl font-bold mb-4">{prop.answers.length} Answers</h2>
-      <select value={sortOption} onChange={handleSortChange}>
+      <select value={sortOption} onChange={handleSortChanged}>
         <option value="0">Default</option>
         <option value="1">Vote</option>
         <option value="2">Created Date</option>

@@ -9,8 +9,9 @@ parrot-ts is a q&amp;a website power by TypeScript, React, Tailwind CSS
 - [x] Implement upvote and downvote
 - [x] Implement sorting
 - [x] Implement store sorting in browser's sessionStorage
+- [x] Refact error handling mechanism and simplify API calling code
 - [ ] Beautify the user interface
-- [ ] Error handling
+
 
 # Guidelines
 - Clone the repository
