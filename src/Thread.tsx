@@ -9,7 +9,7 @@ import {
 } from "./APIs";
 import { Answer } from "./type";
 
-interface TreadProps {
+interface ThreadProps {
   id: number;
   title: string;
   content: string;
@@ -28,7 +28,7 @@ const answerToVoteMap = (answers: Answer[]) =>
     ])
   );
 
-const Tread: FC<TreadProps> = (prop) => {
+const Thread: FC<ThreadProps> = (prop) => {
   const [questionVote, setQuestionVote] = useState<number>(0);
 
   const [answerVotes, setAnswerVotes] = useState<Map<number, number>>(
@@ -123,4 +123,4 @@ const Tread: FC<TreadProps> = (prop) => {
   );
 };
 
-export default Tread;
+export default Thread;
