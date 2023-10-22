@@ -2,8 +2,10 @@ import axios, { AxiosResponse } from "axios";
 import { Result, Question, Answer } from "./type";
 
 const getQuestionURL = (questionId: number) => `/api/question/get?id=${questionId}`;
-const listAnswerURL = (questionId: number, sort: number) => `/api/answer/list?questionId=${questionId}&sort=${sort}`;
+const upvoteQuestionURL = (answerId: number) => `/api/question/upvote?id=${answerId}`;
+const downvoteQuestionURL = (answerId: number) => `/api/question/downvote?id=${answerId}`;
 
+const listAnswerURL = (questionId: number, sort: number) => `/api/answer/list?questionId=${questionId}&sort=${sort}`;
 const upvoteAnswerURL = (answerId: number) => `/api/answer/upvote?id=${answerId}`;
 const downvoteAnswerURL = (answerId: number) => `/api/answer/downvote?id=${answerId}`;
 
@@ -32,6 +34,14 @@ async function HandleResult<T>(fn: () => Promise<AxiosResponse<Result<T>, unknow
 
 export const getQuestion = async (id: number) => {
     return await HandleResult<Question>(() => axios.get<Result<Question>>(getQuestionURL(id)));
+};
+
+export const upvoteQuestion = async (id: number) => {
+    return await HandleResult<boolean>(() => axios.post<Result<boolean>>(upvoteQuestionURL(id)));
+};
+
+export const downvoteQuestion = async (id: number) => {
+    return await HandleResult<boolean>(() => axios.post(downvoteQuestionURL(id)));
 };
 
 export const getAnswers = async (questionId: number, sort: number) => {

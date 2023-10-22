@@ -13,7 +13,7 @@ const App = () => {
   const [question, setQuestion] = useState<Question | null>();
 
   const refreshQuestion = async (id: number, sort: number) => {
-    console.log(`refreshQuestion ${sort}`)
+    console.log(`refreshQuestion ${sort}`);
     const [question] = await getQuestion(id);
     const [answers] = await getAnswers(id, sort);
     if (question) {
@@ -23,7 +23,7 @@ const App = () => {
   };
 
   const refreshAnswers = async (id: number, sort: number) => {
-    console.log(`refreshAnswers ${sort}`)
+    console.log(`refreshAnswers ${sort}`);
     const [answers] = await getAnswers(id, sort);
     if (question) {
       question.answers = answers || [];
@@ -37,8 +37,8 @@ const App = () => {
     if (isFirstRender.current) {
       isFirstRender.current = false;
       return;
-    }    
-    console.log(`useEffect ${sort}`)
+    }
+    console.log(`useEffect ${sort}`);
     refreshQuestion(id, sort);
   }, [sort]);
 
@@ -46,9 +46,12 @@ const App = () => {
     <div className="App">
       {question && (
         <Tread
+          id={question.id}
           title={question.title}
           content={question.content}
           answers={question.answers}
+          upvote={question.upvote}
+          downvote={question.downvote}
           sort={sort}
           refreshFn={(sort: number) => refreshAnswers(id, sort)}
         />
