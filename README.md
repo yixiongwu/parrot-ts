@@ -6,11 +6,13 @@ parrot-ts is a q&amp;a website power by TypeScript, React, Tailwind CSS
 - [x] Implement mock, provide services to the frontend through /api/*
 - [x] Install axios, call mock service and display the data
 - [x] Test single page display, layout, binding
-- [x] Implement upvote and downvote
+- [x] Implement the answer upvote and downvote
 - [x] Implement sorting
 - [x] Implement store sorting in browser's sessionStorage
+- [x] Refact error handling mechanism and simplify API calling code
+- [x] Implement the question upvote and downvote
 - [ ] Beautify the user interface
-- [ ] Error handling
+
 
 # Guidelines
 - Clone the repository
