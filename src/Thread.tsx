@@ -1,17 +1,20 @@
-import { FC, useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
+import { useLocation } from "react-router-dom";
+
 import QuestionComponent from "./Components/Question";
 import AnswerComponent from "./Components/Answer";
 
 import { getAnswers, getQuestion } from "./APIs";
 import { Question, Answer } from "./type";
 
-interface ThreadProps {
-  id: number;
-}
-
 const AnswerSortSessionKey = "AnswerSortSessionKey";
 
-const Thread: FC<ThreadProps> = ({ id }) => {
+const Thread = () => {
+  // get id from browser url query string
+  const location = useLocation();
+  const id = Number(new URLSearchParams(location.search).get("id"));
+
+  // get answer sort key from browser session storage
   const sort = Number(sessionStorage.getItem(AnswerSortSessionKey)) ?? 0;
 
   const [question, setQuestion] = useState<Question | null>();
@@ -19,7 +22,7 @@ const Thread: FC<ThreadProps> = ({ id }) => {
   const [sortOption, setSortOption] = useState<string>(String(sort));
 
   const refreshQuestion = async (id: number, sort: number) => {
-    console.log(`refreshQuestion ${sort}`);
+    console.log(`refreshQuestion id = ${id} sort = ${sort}`);
     const [question] = await getQuestion(id);
     const [answers] = await getAnswers(id, sort);
     if (question) {
@@ -31,7 +34,7 @@ const Thread: FC<ThreadProps> = ({ id }) => {
   };
 
   const refreshAnswers = async (id: number, sort: number) => {
-    console.log(`refreshAnswers ${sort}`);
+    console.log(`refreshAnswers id = ${id} sort = ${sort}`);
     const [answers] = await getAnswers(id, sort);
     if (answers) {
       setAnswers(answers);

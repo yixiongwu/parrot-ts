@@ -1,4 +1,6 @@
 import { FC, useState } from "react";
+import Markdown from "react-markdown";
+import remarkGfm from 'remark-gfm'
 import { ArrowUpIcon, ArrowDownIcon } from "@heroicons/react/24/solid";
 import { upvoteAnswer, downvoteAnswer } from "../APIs";
 
@@ -10,7 +12,9 @@ interface AnswerProps {
 }
 
 const Answer: FC<AnswerProps> = (props) => {
-  const [answerVote, setAnswerVote] = useState<number>(props.upvote>props.downvote?props.upvote-props.downvote:0);
+  const [answerVote, setAnswerVote] = useState<number>(
+    props.upvote > props.downvote ? props.upvote - props.downvote : 0
+  );
 
   const handleAnswerUpvote = async (id: number) => {
     setAnswerVote(answerVote + 1);
@@ -37,7 +41,9 @@ const Answer: FC<AnswerProps> = (props) => {
           onClick={() => handleAnswerDownvote(props.id)}
         />
       </div>
-      <div className="flex-1">{props.content}</div>
+      <div className="flex-1">
+        <Markdown remarkPlugins={[remarkGfm]}>{props.content}</Markdown>
+      </div>
     </div>
   );
 };
