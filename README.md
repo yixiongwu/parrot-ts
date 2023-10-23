@@ -21,6 +21,5 @@ parrot-ts is a q&amp;a website power by TypeScript, React, Tailwind CSS
 - Run `npm i` to install dependent
 - Run `npm run dev` to start the server
 - Press `o` to open the browser
-- Add the id=1 to query string. like `http://localhost:5173/?id=1`
 
 ![1697882202918](https://github.com/yixiongwu/parrot-ts/assets/6177365/37ba417c-e686-496e-951c-2132df243f87)
