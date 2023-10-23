@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { useLocation  } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
 
 import QuestionComponent from "./Components/Question";
 import AnswerComponent from "./Components/Answer";
@@ -12,7 +12,7 @@ const AnswerSortSessionKey = "AnswerSortSessionKey";
 const Thread = () => {
   // get id from browser url query string
   const location = useLocation();
-  const id = Number(new URLSearchParams(location.search).get('id'));
+  const id = Number(new URLSearchParams(location.search).get("id"));
 
   // get answer sort key from browser session storage
   const sort = Number(sessionStorage.getItem(AnswerSortSessionKey)) ?? 0;
@@ -55,7 +55,7 @@ const Thread = () => {
     }
     console.log(`useEffect ${sort}`);
     refreshQuestion(id, sort);
-  }, [sort]);
+  }, [id, sort]);
 
   return (
     <div>
