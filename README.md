@@ -1,6 +1,13 @@
 # parrot-ts
 parrot-ts is a q&amp;a website power by TypeScript, React, Tailwind CSS
 
+# Feature
+1. SPA+router.
+2. Display the Q&A with support markdown text.
+3. Upvote and downvote the Q&A.
+4. Sort the answers with lcoal session storage.
+5. Mock Backend.
+
 # Implementation Steps
 - [x] Initialize the project and upgrade dependencies through npm-check-updates
 - [x] Implement mock, provide services to the frontend through /api/*
