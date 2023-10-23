@@ -12,6 +12,7 @@ parrot-ts is a q&amp;a website power by TypeScript, React, Tailwind CSS
 - [x] Refact error handling mechanism and simplify API calling code
 - [x] Implement the question upvote and downvote
 - [x] Split the thread to question and answer components
+- [x] Add Home page and router
 - [ ] Beautify the user interface
 
 
